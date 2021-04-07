@@ -1,4 +1,7 @@
 package com.company;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Project 3.6.5
@@ -20,14 +23,24 @@ public class MemoryGame {
         // init var called gameEnd set it to true not my fault stupid PLTW and there dumb class.
         boolean gameEnd = true;
         // YEP I made board look at me Mom.
-        gameGUI.createBoard(3, true);
         while (gameEnd) {
             // Yep I made a array
-            String[] memoryString = {"a", "b", "c"};
+            String[] alphabet  = "abcde".split("");
+            int randomEnd = (int) (Math.random() * (alphabet.length - 3) + 3);
+            gameGUI.createBoard(randomEnd, true);
+            String[] gameStringArr = new String[randomEnd];
+            for(int i =0; i < randomEnd; i++){
+                   gameStringArr[i] = alphabet[i];
+
+            }
+
             // Yep this is when I use Permutation.
-            String[] randomStringArray = randomPermutation.makeRandomStringArray(memoryString);
+            String[] randomStringArray = randomPermutation.makeRandomStringArray(gameStringArr);
+
+            double randomDelay =  (Math.random() * (1 - 0.5) + 0.5);
+
             // Then the random string array get loaded
-            String userGuess = gameGUI.playSequence(randomStringArray, 0.5);
+            String userGuess = gameGUI.playSequence(randomStringArray, randomDelay);
             // I hate String Builder oh well it does job to add strings together with a for loop.
             StringBuilder k = new StringBuilder(new String(""));
             for (String s : randomStringArray) {
